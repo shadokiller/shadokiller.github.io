@@ -1,3 +1,3 @@
-Websiteme gitmeye ne dersin?
+# Websiteme gitmeye ne dersin?
 
-# shadokiller.github.io
+# shadokiller.repl.co
