@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaşam Sorgu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 18px;
+        }
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #result {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Yaşam Sorgu</h1>
+        <p>Doğum Tarihinizi Girin:</p>
+        <input type="date" id="birthDate">
+        <button onclick="calculateAge()">Sorgula</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculateAge() {
+            var birthDate = new Date(document.getElementById('birthDate').value);
+            var today = new Date();
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var birthDay = birthDate.getDay();
+            var daysOfWeek = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
+
+            var oneDay = 24 * 60 * 60 * 1000; 
+            var totalDays = Math.round(Math.abs((today - birthDate) / oneDay));
+
+            document.getElementById('result').innerHTML = "Yaşınız: " + age + " <br>Doğduğunuz gün: " + daysOfWeek[birthDay] + "<br>Toplam yaşanılan gün sayısı: " + totalDays + " gün";
+        }
+    </script>
+</body>
+</html>
