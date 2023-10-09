@@ -2,7 +2,6 @@
 <html lang="tr">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
     <title>Ölüm Tarihi Sorgu</title>
     <style>
         body {
@@ -51,10 +50,10 @@
     <h1>Ölüm Tarihi Sorgu</h1>
     <label for="dob">Doğum Tarihinizi Girin:</label>
     <input type="date" id="dob">
-    <button onclick="calculateAge()">Sorgula</button>
+    <button onclick="calculateDeathDate()">Hesapla</button>
     <p id="result"></p>
 
-        <script>
+    <script>
         function calculateDeathDate() {
             var dobInput = document.getElementById("dob");
             var dob = new Date(dobInput.value);
