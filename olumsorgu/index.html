@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+    <title>Ölüm Tarihi Sorgu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            color: #666;
+        }
+
+        input[type="date"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ölüm Tarihi Sorgu</h1>
+    <label for="dob">Doğum Tarihinizi Girin:</label>
+    <input type="date" id="dob">
+    <button onclick="calculateAge()">Sorgula</button>
+    <p id="result"></p>
+
+    <script>
+        function calculateAge() {
+            var dobInput = document.getElementById("dob");
+            var dob = new Date(dobInput.value);
+            var currentDate = new Date();
+
+            var ageInMilliseconds = currentDate - dob;
+            var ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+            var estimatedDeathAge = Math.floor(Math.random() * 100) + 1;
+
+            var resultElement = document.getElementById("result");
+            resultElement.innerHTML = "Öleceğiniz Tarih: " + formatDate(estimatedDeathDate);
+        }
+    </script>
+</body>
+</html>
