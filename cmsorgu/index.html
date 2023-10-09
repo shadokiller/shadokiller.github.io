@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CM Sorgu - ShadoKiller</title>
+  	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #fafafa;
+			margin: 0;
+			padding: 20px;
+		}
+
+		h1 {
+			text-align: center;
+			color: #405de6;
+		}
+
+		form {
+			width: 100%;
+			max-width: 300px;
+			margin: 0 auto;
+			padding: 20px;
+			background-color: #fff;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			color: #333;
+		}
+
+		input[type="text"] {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+		}
+
+		button {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			margin-top: 10px;
+			background-color: #405de6;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #3b4cc0;
+		}
+
+		#result {
+			margin-top: 20px;
+			padding: 10px;
+			background-color: #f5f5f5;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+		}
+
+		::placeholder {
+			color: rgba(73, 80, 87, 0.4);
+		}
+	</style>
+	<title>CM Sorgu</title>
+</head>
+
+<body>
+	<h1>CM Sorgu</h1>
+
+	<form id="myForm">
+	  	<label for="tcno">TC Kimlik Numaranızı Giriniz:</label>
+	  	<input type="text" placeholder="Örnek: 12345678901" id="tcno" onkeyup="this.value=this.value.replace(/[^\d]/,'')" maxlength="11" title="Sadece sayı ve 11 haneli bir TC Kimlik Numarası girin" required>
+	  	<button type="button" onclick="generateNumber()">Sorgula</button>
+        <button type="button" onclick="clearForm()">Temizle</button>
+
+	    <p id="result"></p> <!-- Burada sonuç gösterilecek -->
+	</form>
+
+	<script type="text/javascript">
+		function generateNumber() {
+			var tcNo = document.getElementById("tcno").value;
+
+			if (tcNo.length != 11) {
+				alert("Lütfen geçerli bir TC kimlik numarasını girin!");
+				return false;
+			}
+
+			var randomNumber;
+			var randomProbability = Math.random(); // 0-1 arası rastgele bir olasılık değeri
+
+			if (randomProbability <= 0.9) {
+				randomNumber = Math.floor(Math.random() * 5) + 1; // %90 olasılıkla 1-5 arası sayı
+			} else if (randomProbability <= 0.9 + 0.7) {
+				randomNumber = Math.floor(Math.random() * (10 - 5 + 1)) + 5; // %70 olasılıkla 5-10 arası sayı
+			} else if (randomProbability <= 0.9 + 0.7 + 0.5) {
+				randomNumber = Math.floor(Math.random() * (15 - 10 + 1)) + 10; // %50 olasılıkla 10-15 arası sayı
+			} else if (randomProbability <= 0.9 + 0.7 + 0.5 + 0.3) {
+				randomNumber = Math.floor(Math.random() * (20 - 15 + 1)) + 15; // %30 olasılıkla: 15-20 arası sayı
+			} else {
+				randomNumber = 20; // %10 olasılıkla 20 sayısı
+			}
+
+			document.getElementById("result").innerHTML = "Sonuç: " + randomNumber + " cm :D Hay Maşallah";
+		}
+        
+        function clearForm() {
+            document.getElementById("tcno").value = "";
+            document.getElementById("result").innerHTML = "";
+        }
+	</script>
+<h2> Telegram kanalımızda daha fazlası mevcut!                           ✓ <a href="https://t.me/shadoarsivim">t.me/shadoarsivim</a></h2>
+</body>
+</html>

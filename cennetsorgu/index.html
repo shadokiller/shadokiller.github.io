@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Cennet Sorgu - ShadoKiller</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    h1 {
+      text-align: center;
+      color: #343a40;
+    }
+
+    form {
+      margin-top: 20px;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+    }
+
+    input[type=text] {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      width: auto;
+      margin-bottom: 15px;
+      background-color: #e9ecef;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white !important;
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border-radius: 5px;
+      box-shadow: 0 .25rem .75rem rgba(0, 123, 255, .2), 0 .125rem .25rem rgba(0, 0, 0, .075);
+      width: 55%;
+    }
+
+    .form-button {
+      background-color: #007bff;
+      color: white!important;;
+      padding-left: 20px;
+      padding-right: 20px;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border-radius: 5px;
+      box-shadow: 0 .25rem .75rem rgba(0, 123, 255, .2), 0 .125rem .25rem rgba(0, 0, 0, .075);
+      margin-right: 10%;
+    }
+
+    .form-button:last-child {
+      margin-right: 0;
+    }
+
+    p {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    h1 {
+      text-align: center;
+      color: #343a40;
+    }
+
+    form {
+      margin-top: 20px;
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+    }
+
+    input[type=text] {
+      border: 1px solid #dbdbdb;
+      background-color: #fafafa;
+      color: #262626;
+      padding: .5rem .75rem;
+      font-size: .9rem;
+      line-height: normal;
+    }
+
+    input[type=text]:focus {
+      outline:none !important; /* İstenmeyen çerçevenin kaldırılması */
+      border-color:#b6b6b6; /* Kutucuk odaklandığında yeni bir çerçeve rengi verilmesi */
+    }
+
+    ::placeholder {
+      color: rgba(73,80,87,.4);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Cennet Sorgu</h1>
+  <br></br>
+  <form action="">
+    <label for="sayi">Lütfen TC Kimlik Numarası Giriniz:</label><br/>
+    <input type="text" placeholder="Örnek: 12345678901" id="sayi" onkeyup="this.value=this.value.replace(/[^\d]/,'')" maxlength="11"><br/><br/>
+    <button type="button" onclick="kontrolEt()">Sorgula</button>
+    <button type="button" onclick="temizle()">Temizle</button>
+    <p id="sonuc"></p>
+  </form>
+
+  <script>
+    function getRandomResult() {
+      var results = [
+        ">> Cennete Girecek",
+        ">> Cennete Giremeyecek"
+      ];
+      var randomIndex = Math.floor(Math.random() * results.length);
+      return results[randomIndex];
+    }
+
+    function kontrolEt() {
+      var sayi = document.getElementById("sayi").value;
+
+      if (sayi.length !== 11) {
+        document.getElementById("sonuc").innerHTML = "Lütfen geçerli bir TC Kimlik Numarası girin.";
+        return;
+      }
+
+      var sonuc = getRandomResult();
+      document.getElementById("sonuc").innerHTML = sonuc;
+    }
+
+    function temizle() {
+      document.getElementById("sonuc").innerHTML = "";
+      document.getElementById("sayi").value = "";
+    }
+  </script>
+  <h2> Telegram kanalımızda daha fazlası mevcut!                           ✓ <a href="https://t.me/shadoarsivim">t.me/shadoarsivim</a></h2>
+</body>
+</html>

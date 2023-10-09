@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ayak Sorgu - ShadoKiller</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary-color: #4caf50;
+      --secondary-color: #ff4081;
+      --background-color: #f2f2f2;
+      --container-background-color: #ffffff;
+      --text-color: #333333;
+      --label-color: #555555;
+      --input-background-color: #f9f9f9;
+      --error-color: #ff5722;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: var(--background-color);
+    }
+
+    .container {
+      max-width: 100%;
+      width: 90%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: var(--container-background-color);
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 18px;
+      color: var(--label-color);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 94%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 3px;
+      border: 1px solid #cccccc;
+      background-color: var(--input-background-color);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="text"].filled {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 5px var(--primary-color);
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .button:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: var(--text-color);
+    }
+
+    .error {
+      color: var(--error-color);
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ayak Sorgu</h1>
+    <label for="tc">TC Kimlik Numarası Giriniz:</label>
+    <input type="text" id="tc" placeholder="Örnek: 12345678901" maxlength="11" oninput="checkInput(event)">
+
+    <button class="button" onclick="calculateShoeSize()">Sorgula</button>
+
+    <div class="result" id="result"></div>
+    <div class="error" id="error"></div>
+    <button class="button" onclick="clearInput()">Temizle</button>
+  </div>
+
+  <script>
+    function checkInput(event) {
+      var input = event.target.value;
+      event.target.value = input.replace(/[^0-9]/g, '').slice(0, 11);
+    }
+
+    function calculateShoeSize() {
+      var tcNumber = document.getElementById("tc").value;
+
+      if (tcNumber.length !== 11) {
+        document.getElementById("error").innerHTML = "Hatalı TC Numarası! 11 haneli olmalıdır.";
+        document.getElementById("result").innerHTML = "";
+        return;
+      }
+
+      // Yaşa bağlı olarak ayak numarası hesaplama işlemleri burada yapılır
+      var age = calculateAge(tcNumber);
+      var shoeSize;
+
+      if (age >= 18 && age <= 30) {
+        shoeSize = Math.floor(Math.random() * (42 - 40 + 1)) + 40;
+      } else if (age >= 31 && age <= 50) {
+        shoeSize = Math.floor(Math.random() * (45 - 43 + 1)) + 43;
+      } else if (age >= 51) {
+        shoeSize = Math.floor(Math.random() * (48 - 46 + 1)) + 46;
+      }
+
+      // Sonucu HTML'e yazdırma
+      document.getElementById("error").innerHTML = "";
+      document.getElementById("result").innerHTML = "Ayak Numaranız: " + shoeSize;
+    }
+
+    function calculateAge(tcNumber) {
+      // TC numarasından yaş hesaplaması yapılır
+      // TC numarasının belli bölümlerinden yaş bilgisine ulaşabilirsiniz
+      // Burada yaş hesaplama algoritmasını implemente edebilirsiniz
+      // Örnek olarak, TC numarasının son 2 hanesini yaş olarak kabul edelim
+      var lastTwoDigits = tcNumber.substr(tcNumber.length - 2);
+      var age = parseInt(lastTwoDigits);
+
+      return age;
+    }
+
+    function clearInput() {
+      document.getElementById("tc").value = "";
+      document.getElementById("result").innerHTML = "";
+      document.getElementById("error").innerHTML = "";
+    }
+  
+  </script>
+  <h2> Telegram kanalımızda daha fazlası mevcut!                           ✓ <a href="https://t.me/shadoarsivim">t.me/shadoarsivim</a></h2>
+</body>
+</html>
