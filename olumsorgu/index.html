@@ -54,18 +54,23 @@
     <button onclick="calculateAge()">Sorgula</button>
     <p id="result"></p>
 
-    <script>
-        function calculateAge() {
+        <script>
+        function calculateDeathDate() {
             var dobInput = document.getElementById("dob");
             var dob = new Date(dobInput.value);
-            var currentDate = new Date();
-
-            var ageInMilliseconds = currentDate - dob;
-            var ageInYears = ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
             var estimatedDeathAge = Math.floor(Math.random() * 100) + 1;
+
+            var estimatedDeathDate = new Date(dob.getFullYear() + estimatedDeathAge, dob.getMonth(), dob.getDate());
 
             var resultElement = document.getElementById("result");
             resultElement.innerHTML = "Öleceğiniz Tarih: " + formatDate(estimatedDeathDate);
+        }
+
+        function formatDate(date) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            return day + "." + month + "." + year;
         }
     </script>
 </body>
