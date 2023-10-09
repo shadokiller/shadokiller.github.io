@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operatör Kontrolü</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Operatör Kontrolü</h1>
+    <label for="phone">Telefon Numarası:</label>
+    <input type="text" id="phone" placeholder="Örnek: 05XXYYYZZZZ">
+    <button id="checkBtn">Operatörü Kontrol Et</button>
+    <p id="result"></p>
+    <script>
+        document.getElementById("checkBtn").addEventListener("click", function () {
+            const phoneNumber = document.getElementById("phone").value;
+
+            if (/^05[0-9]{9}$/.test(phoneNumber)) {
+                const operatorCode = phoneNumber.substring(0, 3);
+                let operatorName = "";
+
+                switch (operatorCode) {
+                    case "050":
+                    case "055":
+                        operatorName = "Turkcell";
+                        break;
+                    case "053":
+                        operatorName = "Turk Telekom";
+                        break;
+                    case "054":
+                        operatorName = "Vodafone";
+                        break;
+                    default:
+                        operatorName = "Bilinmeyen";
+                        break;
+                }
+
+                document.getElementById("result").textContent = `Bu numara ${operatorName} operatörüne aittir.`;
+            } else {
+                document.getElementById("result").textContent = "Geçerli bir numara girin.";
+            }
+        });
+    </script>
+</body>
+</html>
