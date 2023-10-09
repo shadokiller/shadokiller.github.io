@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burç Bulucu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #3498db;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        input[type="date"] {
+            padding: 10px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Burç Sorgu</h1>
+        <p>Doğum tarihi giriniz:</p>
+        <input type="date" id="birthdate">
+        <br></br>
+        <button onclick="findZodiac()">Sorgula</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function findZodiac() {
+            const birthdate = new Date(document.getElementById("birthdate").value);
+            const month = birthdate.getMonth() + 1;
+            const day = birthdate.getDate();
+
+            let zodiacSign = "";
+
+            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) {
+                zodiacSign = "Koç";
+            } else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) {
+                zodiacSign = "Boğa";
+            } else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) {
+                zodiacSign = "İkizler";
+            } else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) {
+                zodiacSign = "Yengeç";
+            } else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) {
+                zodiacSign = "Aslan";
+            } else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) {
+                zodiacSign = "Başak";
+            } else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) {
+                zodiacSign = "Terazi";
+            } else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) {
+                zodiacSign = "Akrep";
+            } else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
+                zodiacSign = "Yay";
+            } else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
+                zodiacSign = "Oğlak";
+            } else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) {
+                zodiacSign = "Kova";
+            } else if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) {
+                zodiacSign = "Balık";
+            }
+
+            document.getElementById("result").textContent = `Sorgulanan kişinin burcu: ${zodiacSign}`;
+        }
+    </script>
+</body>
+</html>
