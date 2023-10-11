@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+    <title>Hatıra Bırakma Formu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+        }
+        #hatira-form {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        #hatira-form:hover {
+            transform: scale(1.05);
+        }
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #hatira-list {
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            font-size: 16px;
+            position: relative;
+        }
+        li::before {
+            content: attr(data-tarih-saat);
+            position: absolute;
+            top: -15px;
+            right: 0;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="hatira-form">
+        <h2>Hatıra Bırakma</h2>
+        <form id="form">
+            <div>
+                <label for="kullanici-adi">Kullanıcı Adı:</label>
+                <input type="text" id="kullanici-adi" required>
+            </div>
+            <div>
+                <label for="hatira">Hatıra:</label>
+                <textarea id="hatira" rows="4" required></textarea>
+            </div>
+            <div>
+                <button type="submit">Gönder</button>
+            </div>
+        </form>
+    </div>
+    <div id="hatira-list">
+        <h2>Son Hatıralar</h2>
+        <ul id="hatira-list-ul">
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('form');
+            const hatiraListUl = document.getElementById('hatira-list-ul');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const kullaniciAdi = document.getElementById('kullanici-adi').value;
+                const hatiraMetni = document.getElementById('hatira').value;
+                const tarihSaat = new Date().toLocaleString();
+
+                const yeniHatira = document.createElement('li');
+                yeniHatira.setAttribute('data-tarih-saat', tarihSaat);
+                yeniHatira.innerHTML = `<strong>${kullaniciAdi}</strong> - ${hatiraMetni}`;
+
+                hatiraListUl.appendChild(yeniHatira);
+
+                // Formu temizle
+                document.getElementById('kullanici-adi').value = '';
+                document.getElementById('hatira').value = '';
+
+
+
+            });
+        });
+    </script>
+</body>
+</html>
