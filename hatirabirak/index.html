@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
-    <title>Hatıra Bırakma Formu</title>
+    <title>Hatıra Bırak - ShadoKiller</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,7 +31,7 @@
             font-weight: bold;
         }
         input, textarea {
-            width: 90%;
+            width: 80%;
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -61,7 +61,7 @@
             list-style: none;
             padding: 0;
         }
-        li {
+        .hatira {
             margin-bottom: 10px;
             padding: 10px;
             background-color: #f7f7f7;
@@ -69,7 +69,7 @@
             font-size: 16px;
             position: relative;
         }
-        li::before {
+        .hatira:before {
             content: attr(data-tarih-saat);
             position: absolute;
             top: -15px;
@@ -105,31 +105,59 @@
         </ul>
     </div>
     <script>
+        // Sayfa yüklendiğinde önceki hatıraları getir
         document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('form');
             const hatiraListUl = document.getElementById('hatira-list-ul');
+            const storedHatiralar = JSON.parse(localStorage.getItem('hatiralar')) || [];
 
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const kullaniciAdi = document.getElementById('kullanici-adi').value;
-                const hatiraMetni = document.getElementById('hatira').value;
-                const tarihSaat = new Date().toLocaleString();
-
+            storedHatiralar.forEach(function (hatira) {
                 const yeniHatira = document.createElement('li');
-                yeniHatira.setAttribute('data-tarih-saat', tarihSaat);
-                yeniHatira.innerHTML = `<strong>${kullaniciAdi}</strong> - ${hatiraMetni}`;
+                yeniHatira.className = 'hatira';
+                yeniHatira.setAttribute('data-tarih-saat', hatira.tarihSaat);
+                yeniHatira.innerHTML = hatira.metin;
 
                 hatiraListUl.appendChild(yeniHatira);
-
-                // Formu temizle
-                document.getElementById('kullanici-adi').value = '';
-                document.getElementById('hatira').value = '';
-
-
-
             });
         });
+
+        // Form gönderildiğinde hatırayı ekle
+        const form = document.getElementById('form');
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const kullaniciAdi = document.getElementById('kullanici-adi').value;
+            const hatiraMetni = document.getElementById('hatira').value;
+
+            // Kullanıcıdan gelen metindeki HTML etiketlerini temizle
+            const cleanMetin = stripHtml(hatiraMetni);
+
+            const tamMetin = kullaniciAdi + ": " + cleanMetin;
+
+            const yeniHatira = document.createElement('li');
+            yeniHatira.className = 'hatira';
+            yeniHatira.setAttribute('data-tarih-saat', new Date().toLocaleString());
+            yeniHatira.innerHTML = tamMetin;
+
+            // Yeni hatırayı listeye ekle
+            const hatiraListUl = document.getElementById('hatira-list-ul');
+            hatiraListUl.appendChild(yeniHatira);
+
+            // Yeni hatırayı yerel depolama (localStorage) ile sakla
+            const storedHatiralar = JSON.parse(localStorage.getItem('hatiralar')) || [];
+            storedHatiralar.push({ tarihSaat: new Date().toLocaleString(), metin: tamMetin });
+            localStorage.setItem('hatiralar', JSON.stringify(storedHatiralar));
+
+            // Formu temizle
+            document.getElementById('kullanici-adi').value = '';
+            document.getElementById('hatira').value = '';
+        });
+
+        // HTML etiketlerini temizlemek için bir işlev
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
     </script>
 </body>
 </html>
