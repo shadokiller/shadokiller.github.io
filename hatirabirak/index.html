@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
-    <title>Hatıra Bırak - ShadoKiller</title>
+    <title>Hatıra Bırak</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,7 +29,7 @@
             font-weight: bold;
         }
         input, textarea {
-            width: 90%;
+            width: 100%;
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -128,10 +126,7 @@
             const kullaniciAdi = document.getElementById('kullanici-adi').value;
             const hatiraMetni = document.getElementById('hatira').value;
 
-            // Kullanıcıdan gelen metindeki HTML etiketlerini temizle
-            const cleanMetin = stripHtml(hatiraMetni);
-
-            const tamMetin = kullaniciAdi + ": " + cleanMetin;
+            const tamMetin = kullaniciAdi + ": " + hatiraMetni;
 
             const yeniHatira = document.createElement('li');
             yeniHatira.className = 'hatira';
@@ -151,13 +146,6 @@
             document.getElementById('kullanici-adi').value = '';
             document.getElementById('hatira').value = '';
         });
-
-        // HTML etiketlerini temizlemek için bir işlev
-        function stripHtml(html) {
-            const tmp = document.createElement('div');
-            tmp.innerHTML = html;
-            return tmp.textContent || tmp.innerText || '';
-        }
     </script>
 </body>
 </html>
